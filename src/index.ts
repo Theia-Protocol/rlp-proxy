@@ -2,11 +2,17 @@ require('dotenv').config();
 import express, { Response } from 'express';
 import { getMetadata } from './lib';
 import { APIOutput } from './types';
+const cors = require('cors');
 
 const app = express();
 
 const port = Number(process.env.PORT || 8080);
 const SERVER_URL = process.env.SERVER_URL;
+
+app.use(cors({
+  origin: '*'
+}));
+
 
 const sendResponse = (res: Response, output: APIOutput | null) => {
   if (!output) {
